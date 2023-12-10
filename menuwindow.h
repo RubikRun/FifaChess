@@ -15,6 +15,9 @@ public:
     explicit MenuWindow(QWidget *parent = nullptr);
     ~MenuWindow();
 
+private slots:
+    void on_pushButton_startGame_clicked();
+
 private:
     Ui::MenuWindow *ui;
 };
