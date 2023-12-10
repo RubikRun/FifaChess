@@ -21,3 +21,8 @@ void MenuWindow::on_pushButton_startGame_clicked()
     mainWindow->show();
     close();
 }
+
+void MenuWindow::on_pushButton_quit_clicked()
+{
+    close();
+}
