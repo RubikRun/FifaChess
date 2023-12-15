@@ -17,7 +17,7 @@ MenuWindow::~MenuWindow()
 
 void MenuWindow::on_pushButton_startGame_clicked()
 {
-    MainWindow* mainWindow = new MainWindow();
+    MainWindow *mainWindow = new MainWindow();
     mainWindow->show();
     close();
 }
