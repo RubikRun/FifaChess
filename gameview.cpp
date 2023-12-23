@@ -1,12 +1,15 @@
 #include "gameview.h"
 
-GameView::GameView(QWidget *parent) : QGraphicsView(parent) {
-    QGraphicsScene *scene = new QGraphicsScene(this);
+#include <QGraphicsRectItem>
+
+GameView::GameView(QWidget *parent)
+    : QGraphicsView(parent)
+    , board(QPointF(-400.0f, -400.0f), QPointF(-300.0f, 400.0f), 800.0f)
+    , scene(new QGraphicsScene(this))
+{
     setScene(scene);
+    setRenderHint(QPainter::Antialiasing, true);
+    setBackgroundBrush(backgroundColor);
 
-    QGraphicsRectItem *rectangleItem = new QGraphicsRectItem(0, 0, 100, 100);
-    rectangleItem->setBrush(QBrush(Qt::red));
-    scene->addItem(rectangleItem);
-
-    setBackgroundBrush(QBrush(Qt::blue));
+    board.draw(*scene);
 }
