@@ -18,6 +18,8 @@ public:
 private:
     /// Draws the border of the board on the scene
     void drawBorder(QGraphicsScene &scene) const;
+    void drawSquares(QGraphicsScene &scene) const;
+    void drawSquare(QGraphicsScene &scene, int row, int col) const;
 
 private:
     /// Top-left corner of the board in scene coordinates
@@ -30,9 +32,12 @@ private:
     /// between the top-left corner and the top-right corner.
     float width;
 
+    /// Width of the border's lines in scene coordinates
+    float borderWidth = 50.0f;
+
     QColor primaryColor = QColor(170, 170, 170);
-    QColor secondaryColor = QColor(50, 50, 50);
-    QColor borderColor = QColor(220, 220, 220);
+    QColor secondaryColor = QColor(60, 60, 60);
+    QColor borderColor = QColor(10, 10, 10);
 };
 
 #endif // BOARD_H
