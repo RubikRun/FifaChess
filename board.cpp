@@ -12,6 +12,10 @@ void Board::draw(QGraphicsScene &scene) const
 {
     drawBorder(scene);
     drawSquares(scene);
+
+    if (doDrawDebug) {
+        drawDebug(scene);
+    }
 }
 
 void Board::drawBorder(QGraphicsScene &scene) const
@@ -54,4 +58,22 @@ void Board::drawSquare(QGraphicsScene &scene, int row, int col) const {
     polygonItem->setBrush(color);
     // Add polygon to the scene
     scene.addItem(polygonItem);
+}
+
+void Board::drawDebug(QGraphicsScene &scene) const
+{
+    drawDebugPoint(scene, topLeftPoint);
+    drawDebugPoint(scene, bottomLeftPoint);
+}
+
+void Board::drawDebugPoint(QGraphicsScene &scene, const QPointF &point) const
+{
+    QGraphicsEllipseItem *circle = new QGraphicsEllipseItem(
+        point.x() - debugPointRadius,
+        point.y() - debugPointRadius,
+        debugPointRadius * 2.0f,
+        debugPointRadius * 2.0f
+    );
+    circle->setBrush(debugColor);
+    scene.addItem(circle);
 }

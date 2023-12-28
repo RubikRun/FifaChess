@@ -21,6 +21,9 @@ private:
     void drawSquares(QGraphicsScene &scene) const;
     void drawSquare(QGraphicsScene &scene, int row, int col) const;
 
+    void drawDebug(QGraphicsScene &scene) const;
+    void drawDebugPoint(QGraphicsScene &scene, const QPointF &point) const;
+
 private:
     /// Top-left corner of the board in scene coordinates
     QPointF topLeftPoint;
@@ -35,9 +38,13 @@ private:
     /// Width of the border's lines in scene coordinates
     float borderWidth = 50.0f;
 
-    QColor primaryColor = QColor(170, 170, 170);
-    QColor secondaryColor = QColor(60, 60, 60);
-    QColor borderColor = QColor(10, 10, 10);
+    static constexpr QColor primaryColor = QColor(170, 170, 170);
+    static constexpr QColor secondaryColor = QColor(60, 60, 60);
+    static constexpr QColor borderColor = QColor(10, 10, 10);
+
+    static constexpr QColor debugColor = QColor(255, 0, 0, 100);
+    static constexpr float debugPointRadius = 10.0f;
+    static const bool doDrawDebug = false;
 };
 
 #endif // BOARD_H
