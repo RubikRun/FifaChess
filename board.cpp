@@ -39,7 +39,7 @@ void Board::drawSquares(QGraphicsScene &scene) const
 void Board::drawSquare(QGraphicsScene &scene, int row, int col) const {
     const QPointF toTopLeftVec = topLeftPoint - bottomLeftPoint;
     // Calculate bottom left point of the current square
-    const QPointF blp(bottomLeftPoint.x() + row * toTopLeftVec.x() / 8.0f + col * width / 8.0f, bottomLeftPoint.y() - row * width / 8.0f);
+    const QPointF blp(bottomLeftPoint.x() + row * toTopLeftVec.x() / 8.0f + col * width / 8.0f, bottomLeftPoint.y() + row * toTopLeftVec.y() / 8.0f);
     // Create a polygon with the 4 vertices of the current square
     QPolygonF polygon;
     polygon
