@@ -18,6 +18,21 @@ void Board::draw(QGraphicsScene &scene) const
     }
 }
 
+QPointF Board::getTopLeftPoint() const
+{
+    return topLeftPoint;
+}
+
+QPointF Board::getBottomLeftPoint() const
+{
+    return bottomLeftPoint;
+}
+
+float Board::getWidth() const
+{
+    return width;
+}
+
 void Board::drawBorder(QGraphicsScene &scene) const
 {
     QPainterPath path;

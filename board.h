@@ -15,6 +15,10 @@ public:
     /// Draws the board on the scene
     void draw(QGraphicsScene &scene) const;
 
+    QPointF getTopLeftPoint() const;
+    QPointF getBottomLeftPoint() const;
+    float getWidth() const;
+
 private:
     /// Draws the border of the board on the scene
     void drawBorder(QGraphicsScene &scene) const;
