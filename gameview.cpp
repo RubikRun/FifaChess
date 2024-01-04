@@ -7,6 +7,7 @@ GameView::GameView(QWidget *parent)
     : QGraphicsView(parent)
     , scene(new QGraphicsScene(this))
     , board(QPointF(-400.0f, -400.0f), QPointF(-300.0f, 400.0f), 800.0f)
+    , boardUI(&board)
     , time(0.0f)
 {
     setScene(scene);
@@ -15,6 +16,9 @@ GameView::GameView(QWidget *parent)
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
     initPieces();
+    // Select some initial pieces in UI, for testing
+    boardUI.setSelectedByFirst(QPoint(2, 1));
+    boardUI.setSelectedBySecond(QPoint(6, 6));
 
     // Create the game loop timer,
     gameLoopTimer = new QTimer(this);
@@ -61,6 +65,7 @@ void GameView::draw() const
     for (int i = 31; i >= 0; i--) {
         pieces[i]->draw(*scene);
     }
+    boardUI.draw(*scene);
 }
 
 void GameView::initPieces()

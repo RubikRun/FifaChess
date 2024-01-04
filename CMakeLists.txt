@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         gameview.h gameview.cpp
         board.h board.cpp
         piece.h piece.cpp
+        boardui.h boardui.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FifaChess APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -19,6 +19,11 @@ public:
     QPointF getBottomLeftPoint() const;
     float getWidth() const;
 
+    /// Returns a 4-point polygon (parallelogram) in scene coordinates
+    /// that represents the requested square of the chess board
+    /// the way it is projected on the scene
+    QPolygonF getPolygonOfSquare(int row, int col) const;
+
 private:
     /// Draws the border of the board on the scene
     void drawBorder(QGraphicsScene &scene) const;

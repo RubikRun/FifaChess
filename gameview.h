@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 
 #include "board.h"
+#include "boardui.h"
 #include "piece.h"
 #include <QKeyEvent>
 
@@ -22,6 +23,7 @@ private:
 private:
     QGraphicsScene *scene;
     Board board;
+    BoardUI boardUI;
     Piece *pieces[32];
 
     /// Time in seconds since the creation of this GameView
