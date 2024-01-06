@@ -20,6 +20,10 @@ private:
     /// Initializes the 32 pieces on the board
     void initPieces();
 
+    void initBoardUI();
+
+    void keyPressEvent(QKeyEvent *event) override;
+
 private:
     QGraphicsScene *scene;
     Board board;
@@ -36,6 +40,9 @@ private:
     static const int updateInterval = 16;
     /// The standard order of pieces on the first and last row of a chess board
     static constexpr PieceType orderOfPieces[8] = { Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook };
+    /// The initially selected pieces by each player when game is started
+    static constexpr QPoint initialSelectedPieceByFirst = QPoint(3, 1);
+    static constexpr QPoint initialSelectedPieceBySecond = QPoint(4, 6);
 };
 
 #endif // GAMEVIEW_H
