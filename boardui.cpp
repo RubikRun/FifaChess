@@ -23,8 +23,14 @@ QPoint BoardUI::getSelectedByFirst() const
     return selectedByFirst;
 }
 
+static void clampQPoint(QPoint &point, QPoint min, QPoint max) {
+    point.setX(qBound(min.x(), point.x(), max.x()));
+    point.setY(qBound(min.y(), point.y(), max.y()));
+}
+
 void BoardUI::setSelectedByFirst(QPoint newSelectedByFirst)
 {
+    clampQPoint(newSelectedByFirst, QPoint(0, 0), QPoint(7, 7));
     selectedByFirst = newSelectedByFirst;
 }
 
@@ -35,6 +41,7 @@ QPoint BoardUI::getSelectedBySecond() const
 
 void BoardUI::setSelectedBySecond(QPoint newSelectedBySecond)
 {
+    clampQPoint(newSelectedBySecond, QPoint(0, 0), QPoint(7, 7));
     selectedBySecond = newSelectedBySecond;
 }
 

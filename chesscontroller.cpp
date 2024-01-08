@@ -34,11 +34,14 @@ PieceType ChessController::getSquarePiece(QPoint square) const
 
 void ChessController::findMoves(QPoint square, QPoint *moves) const
 {
-    const PieceType pieceType = getSquarePiece(square);
     // Initialize all moves to invalid
     for (int i = 0; i < 7; i++) {
         moves[i] = QPoint(-1, -1);
     }
+    if (!getSquareHasPiece(square)) {
+        return;
+    }
+    const PieceType pieceType = getSquarePiece(square);
     findMovesAsIfAlone(square, pieceType, moves);
     removeMovesThatOverlapOwnPiece(pieceType.color, moves);
 }
