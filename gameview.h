@@ -20,6 +20,7 @@ private:
 
     /// Initializes the 32 pieces on the board
     void initPieces();
+    void initPiecesRandomly();
 
     void initBoardUI();
 
@@ -45,6 +46,8 @@ private:
     /// The initially selected pieces by each player when game is started
     static constexpr QPoint initialSelectedPieceByFirst = QPoint(3, 1);
     static constexpr QPoint initialSelectedPieceBySecond = QPoint(4, 6);
+
+    static const bool doInitPiecesRandomly = true;
 };
 
 #endif // GAMEVIEW_H
