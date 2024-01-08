@@ -33,11 +33,11 @@ float Board::getWidth() const
     return width;
 }
 
-QPolygonF Board::getPolygonOfSquare(int row, int col) const
+QPolygonF Board::getPolygonOfSquare(QPoint square) const
 {
     const QPointF toTopLeftVec = topLeftPoint - bottomLeftPoint;
     // Calculate bottom left point of the current square
-    const QPointF blp(bottomLeftPoint.x() + row * toTopLeftVec.x() / 8.0f + col * width / 8.0f, bottomLeftPoint.y() + row * toTopLeftVec.y() / 8.0f);
+    const QPointF blp(bottomLeftPoint.x() + square.y() * toTopLeftVec.x() / 8.0f + square.x() * width / 8.0f, bottomLeftPoint.y() + square.y() * toTopLeftVec.y() / 8.0f);
     // Create a polygon with the 4 vertices of the current square
     QPolygonF polygon;
     polygon
@@ -63,19 +63,19 @@ void Board::drawBorder(QGraphicsScene &scene) const
 
 void Board::drawSquares(QGraphicsScene &scene) const
 {
-    for (int row = 0; row < 8; row++) {
-        for (int col = 0; col < 8; col++) {
-            drawSquare(scene, row, col);
+    for (QPoint square(0, 0); square.y() < 8; square.setY(square.y() + 1)) {
+        for (square.setX(0); square.x() < 8; square.setX(square.x() + 1)) {
+            drawSquare(scene, square);
         }
     }
 }
 
-void Board::drawSquare(QGraphicsScene &scene, int row, int col) const
+void Board::drawSquare(QGraphicsScene &scene, QPoint square) const
 {
-    QPolygonF polygon = getPolygonOfSquare(row, col);
+    QPolygonF polygon = getPolygonOfSquare(square);
     QGraphicsPolygonItem *polygonItem = new QGraphicsPolygonItem(polygon);
     // Choose a color for the current square so that they are altering between primary and secondary color
-    const QColor color = (row + col) % 2 == 0 ? primaryColor : secondaryColor;
+    const QColor color = (square.x() + square.y()) % 2 == 0 ? primaryColor : secondaryColor;
     polygonItem->setPen(color);
     polygonItem->setBrush(color);
     // Add polygon to the scene

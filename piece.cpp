@@ -1,11 +1,9 @@
 #include "piece.h"
 
-Piece::Piece(const Board *board, PieceType type, bool color, int row, int col, const QPixmap *bigPixmap)
+Piece::Piece(const Board *board, PieceType pieceType, QPoint square, const QPixmap *bigPixmap)
     : board(board)
-    , type(type)
-    , color(color)
-    , row(row)
-    , col(col)
+    , pieceType(pieceType)
+    , square(square)
     , bigPixmap(bigPixmap)
 {
     initPixmap();
@@ -21,6 +19,16 @@ void Piece::draw(QGraphicsScene &scene) const
     QGraphicsPixmapItem *pixmapItem = new QGraphicsPixmapItem(pixmap);
     pixmapItem->setPos(pixmapPos);
     scene.addItem(pixmapItem);
+}
+
+const QPoint Piece::getSquare() const
+{
+    return square;
+}
+
+const PieceType Piece::getPieceType() const
+{
+    return pieceType;
 }
 
 void Piece::initPixmap()
@@ -40,8 +48,8 @@ void Piece::initPixmapPos()
     const QPointF toTopLeftVec = board->getTopLeftPoint() - board->getBottomLeftPoint();
     // Calculate bottom left point of the current square
     const QPointF blp(
-        board->getBottomLeftPoint().x() + row * toTopLeftVec.x() / 8.0f + col * board->getWidth() / 8.0f,
-        board->getBottomLeftPoint().y() + row * toTopLeftVec.y() / 8.0f
+        board->getBottomLeftPoint().x() + square.y() * toTopLeftVec.x() / 8.0f + square.x() * board->getWidth() / 8.0f,
+        board->getBottomLeftPoint().y() + square.y() * toTopLeftVec.y() / 8.0f
         );
     pixmapPos = QPointF(
         blp.x() + ratioLeftOfPieceOnSquare * board->getWidth() / 8.0f,
@@ -51,8 +59,8 @@ void Piece::initPixmapPos()
 
 const QRect &Piece::getImageRegion() const
 {
-    if (color) {
-        return imageRegions[type];
+    if (pieceType.color) {
+        return imageRegions[pieceType.shape];
     }
-    return imageRegions[6 + type];
+    return imageRegions[6 + pieceType.shape];
 }

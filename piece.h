@@ -4,14 +4,27 @@
 #include "board.h"
 #include "qgraphicsitem.h"
 
-enum PieceType { Pawn, Rook, Knight, Bishop, Queen, King };
+enum PieceShape { Pawn, Rook, Knight, Bishop, Queen, King };
+
+struct PieceType
+{
+    PieceType(){}
+    PieceType(PieceShape shape, bool color) : shape(shape), color(color) {}
+    /// Chess shape of piece
+    PieceShape shape = PieceShape::Pawn;
+    /// Color of the piece. True is white, false is black
+    bool color = true;
+};
 
 class Piece
 {
 public:
-    Piece(const Board *board, PieceType type, bool color, int row, int col, const QPixmap *bigPixmap);
+    Piece(const Board *board, PieceType pieceType, QPoint square, const QPixmap *bigPixmap);
 
     void draw(QGraphicsScene &scene) const;
+
+    const QPoint getSquare() const;
+    const PieceType getPieceType() const;
 
 private:
     void initPixmap();
@@ -23,13 +36,10 @@ private:
 private:
     /// The board this piece belongs to
     const Board *board = nullptr;
-    /// Chess type of piece
-    PieceType type;
-    /// Color of the piece. True is white, false is black
-    bool color = true;
-    /// Position piece on board
-    int row = -1;
-    int col = -1;
+    /// Type of the piece
+    PieceType pieceType;
+    /// Position of piece on board
+    QPoint square;
 
     /// Pixel data of the piece's image
     QPixmap pixmap;

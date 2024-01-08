@@ -7,7 +7,7 @@ GameView::GameView(QWidget *parent)
     : QGraphicsView(parent)
     , scene(new QGraphicsScene(this))
     , board(QPointF(-400.0f, -400.0f), QPointF(-300.0f, 400.0f), 800.0f)
-    , boardUI(&board)
+    , boardUI(&board, &chessController)
     , time(0.0f)
 {
     setScene(scene);
@@ -16,6 +16,7 @@ GameView::GameView(QWidget *parent)
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
     initPieces();
+    chessController.update(pieces);
     initBoardUI();
 
     // Create the game loop timer,
@@ -54,6 +55,7 @@ void GameView::update()
             800.0f
         );
     }
+    chessController.update(pieces);
 }
 
 void GameView::draw() const
@@ -70,10 +72,10 @@ void GameView::initPieces()
 {
     const QPixmap bigPixmap("C:/dev/FifaChess/res/images/chess_pieces.png");
     for (int i = 0; i < 8; i++) {
-        pieces[i] = new Piece(&board, orderOfPieces[i], true, 0, i, &bigPixmap);
-        pieces[8 + i] = new Piece(&board, Pawn, true, 1, i, &bigPixmap);
-        pieces[16 + i] = new Piece(&board, Pawn, false, 6, i, &bigPixmap);
-        pieces[24 + i] = new Piece(&board, orderOfPieces[i], false, 7, i, &bigPixmap);
+        pieces[i] = new Piece(&board, PieceType(orderOfPieces[i], true), QPoint(i, 0), &bigPixmap);
+        pieces[8 + i] = new Piece(&board, PieceType(Pawn, true), QPoint(i, 1), &bigPixmap);
+        pieces[16 + i] = new Piece(&board, PieceType(Pawn, false), QPoint(i, 6), &bigPixmap);
+        pieces[24 + i] = new Piece(&board, PieceType(orderOfPieces[i], false), QPoint(i, 7), &bigPixmap);
     }
 }
 

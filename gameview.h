@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 
 #include "board.h"
+#include "chesscontroller.h"
 #include "boardui.h"
 #include "piece.h"
 #include <QKeyEvent>
@@ -26,6 +27,7 @@ private:
 
 private:
     QGraphicsScene *scene;
+    ChessController chessController;
     Board board;
     BoardUI boardUI;
     Piece *pieces[32];
@@ -39,7 +41,7 @@ private:
     /// 16 milliseconds is about 60 FPS
     static const int updateInterval = 16;
     /// The standard order of pieces on the first and last row of a chess board
-    static constexpr PieceType orderOfPieces[8] = { Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook };
+    static constexpr PieceShape orderOfPieces[8] = { Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook };
     /// The initially selected pieces by each player when game is started
     static constexpr QPoint initialSelectedPieceByFirst = QPoint(3, 1);
     static constexpr QPoint initialSelectedPieceBySecond = QPoint(4, 6);

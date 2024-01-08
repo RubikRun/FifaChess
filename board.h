@@ -22,13 +22,13 @@ public:
     /// Returns a 4-point polygon (parallelogram) in scene coordinates
     /// that represents the requested square of the chess board
     /// the way it is projected on the scene
-    QPolygonF getPolygonOfSquare(int row, int col) const;
+    QPolygonF getPolygonOfSquare(QPoint square) const;
 
 private:
     /// Draws the border of the board on the scene
     void drawBorder(QGraphicsScene &scene) const;
     void drawSquares(QGraphicsScene &scene) const;
-    void drawSquare(QGraphicsScene &scene, int row, int col) const;
+    void drawSquare(QGraphicsScene &scene, QPoint square) const;
 
     void drawDebug(QGraphicsScene &scene) const;
     void drawDebugPoint(QGraphicsScene &scene, const QPointF &point) const;
