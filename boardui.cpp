@@ -10,11 +10,15 @@ void BoardUI::draw(QGraphicsScene &scene) const
 {
     if (selectedByFirst.x() > -1 && selectedByFirst.y() > -1) {
         drawSelectedHighlight(scene, selectedByFirst);
-        drawIndicatorOfMoves(scene, selectedByFirst);
+        if (chessController->getSquareHasPiece(selectedByFirst) && chessController->getSquarePiece(selectedByFirst).color) {
+            drawIndicatorOfMoves(scene, selectedByFirst);
+        }
     }
     if (selectedBySecond.x() > -1 && selectedBySecond.y() > -1) {
         drawSelectedHighlight(scene, selectedBySecond);
-        drawIndicatorOfMoves(scene, selectedBySecond);
+        if (chessController->getSquareHasPiece(selectedBySecond) && !chessController->getSquarePiece(selectedBySecond).color) {
+            drawIndicatorOfMoves(scene, selectedBySecond);
+        }
     }
 }
 
@@ -57,10 +61,10 @@ void BoardUI::drawSelectedHighlight(QGraphicsScene &scene, QPoint square) const
 
 void BoardUI::drawIndicatorOfMoves(QGraphicsScene &scene, QPoint square) const
 {
-    QPoint moves[7];
+    QPoint moves[28];
     chessController->findMoves(square, moves);
 
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 28; i++) {
         if (moves[i].x() > -1 && moves[i].y() > -1) {
             drawIndicatorOfMove(scene, moves[i]);
         }

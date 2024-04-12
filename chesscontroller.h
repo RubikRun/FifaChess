@@ -17,10 +17,15 @@ public:
     void findMoves(QPoint square, QPoint *moves) const;
 
 private:
-    void findMovesAsIfAlone(QPoint square, PieceType pieceType, QPoint *moves) const;
-    void removeMovesThatOverlapOwnPiece(bool color, QPoint *moves) const;
+    void findMovesOfPawn(QPoint square, bool color, QPoint *moves) const;
+    void findMovesOfRook(QPoint square, bool color, QPoint *moves) const;
+    void findMovesOfKnight(QPoint square, bool color, QPoint *moves) const;
+    void findMovesOfBishop(QPoint square, bool color, QPoint *moves) const;
+    void findMovesOfQueen(QPoint square, bool color, QPoint *moves) const;
+    void findMovesOfKing(QPoint square, bool color, QPoint *moves) const;
 
-private:
+    static bool isValidSquare(QPoint square);
+
     void setSquareHasPiece(QPoint square, bool hasPiece);
     void setSquarePiece(QPoint square, PieceType piece);
 
